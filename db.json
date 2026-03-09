@@ -1,0 +1,54 @@
+{
+  "orders": [
+    {
+      "orderNumber": "ORD-1001",
+      "customerName": "Alice Johnson",
+      "productName": "Laptop Pro 15",
+      "quantity": 2,
+      "unitPrice": 75000,
+      "status": "Pending",
+      "orderDate": "2026-03-01",
+      "id": 1
+    },
+    {
+      "orderNumber": "ORD-1002",
+      "customerName": "Bob Smith",
+      "productName": "Wireless Mouse",
+      "quantity": 15,
+      "unitPrice": 1200,
+      "status": "Shipped",
+      "orderDate": "2026-03-11",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "orderNumber": "ORD-1003",
+      "customerName": "Carol Williams",
+      "productName": "USB-C Hub",
+      "quantity": 5,
+      "unitPrice": 2500,
+      "status": "Delivered",
+      "orderDate": "2026-03-03"
+    },
+    {
+      "id": 4,
+      "orderNumber": "ORD-1004",
+      "customerName": "David Lee",
+      "productName": "Mechanical Keyboard",
+      "quantity": 3,
+      "unitPrice": 4500,
+      "status": "Processing",
+      "orderDate": "2026-03-05"
+    },
+    {
+      "id": 5,
+      "orderNumber": "ORD-1005",
+      "customerName": "Eva Martinez",
+      "productName": "External SSD 1TB",
+      "quantity": 4,
+      "unitPrice": 6800,
+      "status": "Cancelled",
+      "orderDate": "2026-03-06"
+    }
+  ]
+}
