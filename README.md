@@ -99,8 +99,8 @@ Shellng testShow more lines
 🐞 Troubleshooting
     Issue	                                              Solution
 CORS errors	                     -    Ensure backend runs on port 3000 with CORS enabled
-Angular cannot reach backend	   -    Check API URLs in Angular services
-"Port already in use"	           -    Kill process or change port in server.js / Angular config
+Angular cannot reach backend	 -    Check API URLs in Angular services
+"Port already in use"	         -    Kill process or change port in server.js / Angular config
 ng serve fails	                 -    Delete node_modules and rerun npm install
 
 
