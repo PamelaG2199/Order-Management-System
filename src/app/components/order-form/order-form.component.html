@@ -1,0 +1,187 @@
+<div class="row justify-content-center">
+  <div class="col-md-9 col-lg-7">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/orders" class="text-decoration-none">
+            <i class="bi bi-list-ul me-1"></i>Orders
+          </a>
+        </li>
+        <li class="breadcrumb-item active">{{ isEditMode ? 'Edit Order' : 'New Order' }}</li>
+      </ol>
+    </nav>
+
+    <div class="card shadow-sm">
+      <!-- Card Header -->
+      <div class="card-header bg-primary text-white py-3">
+        <h5 class="mb-0">
+          <i class="bi me-2" [ngClass]="isEditMode ? 'bi-pencil-square' : 'bi-plus-circle'"></i>
+          {{ isEditMode ? 'Edit Order' : 'Add New Order' }}
+        </h5>
+      </div>
+
+      <div class="card-body p-4">
+
+        <!-- Error Alert -->
+        <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ errorMessage }}
+          <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+        </div>
+
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- Row 1: Order Number & Order Date -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="orderNumber" class="form-label fw-semibold">
+                Order Number <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                id="orderNumber"
+                formControlName="orderNumber"
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['orderNumber'].invalid}"
+                placeholder="e.g. ORD-1001"
+              />
+              <div class="invalid-feedback">
+                <span *ngIf="f['orderNumber'].errors?.['required']">Order number is required.</span>
+                <span *ngIf="f['orderNumber'].errors?.['pattern']">
+                  Must follow format ORD-XXXX (e.g. ORD-1001).
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="orderDate" class="form-label fw-semibold">
+                Order Date <span class="text-danger">*</span>
+              </label>
+              <input
+                type="date"
+                id="orderDate"
+                formControlName="orderDate"
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['orderDate'].invalid}"
+              />
+              <div class="invalid-feedback">Order date is required.</div>
+            </div>
+          </div>
+
+          <!-- Row 2: Customer Name -->
+          <div class="mb-3">
+            <label for="customerName" class="form-label fw-semibold">
+              Customer Name <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              id="customerName"
+              formControlName="customerName"
+              class="form-control"
+              [ngClass]="{'is-invalid': submitted && f['customerName'].invalid}"
+              placeholder="Enter customer full name"
+            />
+            <div class="invalid-feedback">
+              <span *ngIf="f['customerName'].errors?.['required']">Customer name is required.</span>
+              <span *ngIf="f['customerName'].errors?.['minlength']">Minimum 3 characters required.</span>
+            </div>
+          </div>
+
+          <!-- Row 3: Product Name -->
+          <div class="mb-3">
+            <label for="productName" class="form-label fw-semibold">
+              Product Name <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              id="productName"
+              formControlName="productName"
+              class="form-control"
+              [ngClass]="{'is-invalid': submitted && f['productName'].invalid}"
+              placeholder="Enter product name"
+            />
+            <div class="invalid-feedback">
+              <span *ngIf="f['productName'].errors?.['required']">Product name is required.</span>
+              <span *ngIf="f['productName'].errors?.['minlength']">Minimum 2 characters required.</span>
+            </div>
+          </div>
+
+          <!-- Row 4: Quantity & Unit Price -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="quantity" class="form-label fw-semibold">
+                Quantity <span class="text-danger">*</span>
+              </label>
+              <input
+                type="number"
+                id="quantity"
+                formControlName="quantity"
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['quantity'].invalid}"
+                placeholder="Enter quantity"
+                min="1"
+              />
+              <div class="invalid-feedback">
+                <span *ngIf="f['quantity'].errors?.['required']">Quantity is required.</span>
+                <span *ngIf="f['quantity'].errors?.['min']">Quantity must be at least 1.</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="unitPrice" class="form-label fw-semibold">
+                Unit Price (₹) <span class="text-danger">*</span>
+              </label>
+              <div class="input-group" [ngClass]="{'has-validation': submitted && f['unitPrice'].invalid}">
+                <span class="input-group-text">₹</span>
+                <input
+                  type="number"
+                  id="unitPrice"
+                  formControlName="unitPrice"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': submitted && f['unitPrice'].invalid}"
+                  placeholder="0.00"
+                  min="0.01"
+                  step="0.01"
+                />
+                <div class="invalid-feedback">
+                  <span *ngIf="f['unitPrice'].errors?.['required']">Unit price is required.</span>
+                  <span *ngIf="f['unitPrice'].errors?.['min']">Unit price must be greater than 0.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 5: Status -->
+          <div class="mb-4">
+            <label for="status" class="form-label fw-semibold">
+              Status <span class="text-danger">*</span>
+            </label>
+            <select
+              id="status"
+              formControlName="status"
+              class="form-select"
+              [ngClass]="{'is-invalid': submitted && f['status'].invalid}"
+            >
+              <option *ngFor="let s of statusOptions" [value]="s">{{ s }}</option>
+            </select>
+            <div class="invalid-feedback">Please select a status.</div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">
+              <i class="bi me-1" [ngClass]="isEditMode ? 'bi-save' : 'bi-plus-circle'"></i>
+              {{ isEditMode ? 'Update Order' : 'Create Order' }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary px-4" (click)="onCancel()">
+              <i class="bi bi-x-circle me-1"></i>Cancel
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

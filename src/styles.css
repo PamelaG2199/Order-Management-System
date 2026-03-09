@@ -1,0 +1,43 @@
+/* Global Styles — OMS Application */
+
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.3px;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.table > tbody > tr:hover {
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.4em 0.8em;
+  border-radius: 20px;
+}
+
+.btn-sm {
+  padding: 0.2rem 0.5rem;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+footer {
+  border-top: 1px solid #dee2e6;
+}

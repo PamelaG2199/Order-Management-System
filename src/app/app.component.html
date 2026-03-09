@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/orders">
+      <i class="bi bi-box-seam me-2"></i>OMS &mdash; Invenza Technologies
+    </a>
+    <div class="ms-auto">
+      <a routerLink="/orders" class="btn btn-outline-light btn-sm">
+        <i class="bi bi-list-ul me-1"></i>Orders
+      </a>
+      <a routerLink="/orders/add" class="btn btn-light btn-sm ms-2">
+        <i class="bi bi-plus-circle me-1"></i>Add Order
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="container mt-4 mb-5">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="text-center text-muted py-3 small">
+  &copy; {{ currentYear }} Invenza Technologies Pvt. Ltd. &mdash; Order Management System
+</footer>
